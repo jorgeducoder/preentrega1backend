@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { CartManager } from "../manager/CartManager.js";
-import { ProductManager } from "../manager/ProductManager.js";
+import { ProductManager } from "../manager/productManager.js";
 
 const CM = new CartManager("./src/cartsaborescaseros.json");
 const PM = new ProductManager("./src/saborescaseros.json");
@@ -30,20 +30,22 @@ router.get('/:cid', async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
-    const { cid, pid } = req.params;
-    const { cantidad } = req.body;
-    if (!cid || !pid || !cantidad )
-    
+router.post("/:cid/productos", async (req, res) => {
+    //const { cid, pid } = req.params;
+    const { cid } = req.params;
+    const { id, quantity } = req.body;
+    console.log (cid, id, quantity);
+    if (!cid || !id || !quantity )
+        
         // No permite crear un carrito sin al menos un producto
-        return res.status(400).send({error: "Faltan datos para crear/agregar al carrito"});
+        return res.status(400).send({error: "Faltan datos para crear o agregar al carrito"});
     
-    const product = await PM.getProductbyId(pid)
+    const product = await PM.getProductbyId(id)
     if (!product)
     return res.status(404).send({error: "Producto no existe"});
 
       
-     await CM.addCart(cid, pid, cantidad);
+     await CM.addCart(cid, id, quantity);
 
     res.status(201).send({message: "Producto creado correctamente!"});
 });

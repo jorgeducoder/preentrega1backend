@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProductManager } from "../manager/ProductManager.js";
+import { ProductManager } from "../manager/productManager.js";
 
 const PM = new ProductManager("./src/saborescaseros.json");
 

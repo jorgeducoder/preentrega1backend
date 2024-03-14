@@ -1,11 +1,20 @@
-[ 
- {
-  "idcarrito": 1,
-  "productos": [ 
-    {
-      "id": 1,
-      "quantity": 2
-      }
-    ]
- }
+[
+	{
+		"idcarrito": "51",
+		"productos": [
+			{
+				"id": "2",
+				"quantity": 40
+			}
+		]
+	},
+	{
+		"idcarrito": "71",
+		"productos": [
+			{
+				"id": "1",
+				"quantity": 10
+			}
+		]
+	}
 ]
