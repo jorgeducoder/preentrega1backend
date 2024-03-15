@@ -10,10 +10,12 @@ export class ProductManager {
         this.archivo = archivo;
         
     }
-
+    
+    
     async addProduct(producto) {
         
         
+
         const nuevoProducto = { id: await this.GetId(), ...producto, };
         
         
@@ -41,6 +43,9 @@ export class ProductManager {
     }
 
     async getProduct() {
+        
+        console.log(" ARCHIVO: ", this.archivo);
+        
         try {
             const productos = await fs.promises.readFile(this.archivo, "utf-8");
             

@@ -47,10 +47,9 @@ export class CartManager {
        
         //Obtengo todos los carritos para agregarle el nuevo.
         const carts = await this.getCarts();
-        // Obtengo el carrito si lo ncuentra
-        const cart = await this.getCartbyId(cid);
+              
 
-        if(!cart){
+        if(!carts){
           
           // Si no existe el carrito lo creo con su primer producto
           
@@ -60,7 +59,7 @@ export class CartManager {
             [{
             id: pid,
             quantity: cantidad
-            },]
+            }]
            
           }
               
@@ -68,6 +67,7 @@ export class CartManager {
           carts.push(newcart);
           
            try {
+                //await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
                 await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
            
             } catch(e) {
@@ -78,43 +78,74 @@ export class CartManager {
 
             // Busco si el producto esta en el carrito
              
-             //const productosEncarrito = await this.getproductoencarrito(cid)
-             //const productoexiste = productosEncarrito.productos.find((p) => p.id === pid);
-            
-             //const cart = await this.getCartbyId(cid);
+                        
+             const cart = await this.getCartbyId(cid);
              
-             console.log("estoy con este cart para agregar o actualizar producto: ", cart);
-            
-            
-             const productoexiste = cart.productos.find((productos) => productos.id === pid);
-            
-            console.log("Estoy con este producto: ", productoexiste);
-            
-            if (productoexiste) {
-                 
-                productoexiste.quantity = productoexiste.quantity + cantidad;
-                console.log("Lo actualizo?: ", productoexiste, cantidad);
-                // Falta actualiza carts con este producto
+             console.log("estoy con este cart para agregar o actualizar producto: ", carts);
+            if (!cart) {
 
-
+                const newcart = {
+                    idcarrito: cid,
+                    productos: 
+                      [{
+                      id: pid,
+                      quantity: cantidad
+                      }]
+                     
+                    }
+                        
+                    // Guardo el nuevo carrito con su primer poducto.
+                    carts.push(newcart);
+                    console.log("... y ahora con estos carts: ", carts);
+                    try {
+                        await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
+                        //await fs.promises.writeFile(carts, JSON.stringify(carts, null, "\t"));
+                   
+                    } catch(e) {
+                     console.error("Error al agregar el carrito\n", e);
+        
+                    }  
             }else{
+                const productoexiste = cart.productos.find((productos) => productos.id === pid);
                 
-                carts.productos.push({ id:pid, quantty: cantidad});
-                 
-                              
-                try {
-                    await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
-                    console.log("Lo agrego?: ", cart);
-               
-                } catch(e) {
-                 console.error("Error al agregar el en carrito\n", e);
-    
-                }  
-            }
-        
-        }   
-        
-    }
-}
+                if (!productoexiste){
+                    const nuevoproducto = {
+                    id: pid, 
+                    quantity: cantidad};
+                    console.log("... y ahora con este carts para agregar un producto: ", carts);
 
-export default CartManager;
+                    cart.productos.push({ nuevoproducto});
+
+                    try {
+                        
+                        await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
+                   
+                    } catch(e) {
+                    
+                        console.error("Error al agregar el carrito\n", e);
+        
+                    }  
+
+
+                } else {
+                   
+                    productos.quantity += cantidad;
+
+                    try {
+                        
+                        await fs.promises.writeFile(this.archivo, JSON.stringify(carts, null, "\t"));
+                   
+                    } catch(e) {
+                    
+                        console.error("Error al agregar el carrito\n", e);
+        
+                    }  
+                }
+              }  
+            }
+        }   
+       
+    }
+
+
+//export default CartManager;

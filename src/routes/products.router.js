@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ProductManager } from "../manager/productManager.js";
 
+// Al definir una nueva clase se indica el archivo donde alojar esa clase.
 const PM = new ProductManager("./src/saborescaseros.json");
 
 // Define los metodos para el router de usuarios
