@@ -1,92 +1,101 @@
 [
 	{
 		"id": 1,
-		"title": "productoprueba1",
-		"description": "este es un producto actualizado",
-		"price": 200,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc124",
-		"stock": 10
+		"nombre": "Pizza",
+		"porciones": 8,
+		"recetadesc": "Producto cambiado",
+		"img": "/img/pastafrola.jpg",
+		"maxprod": 20,
+		"precio": 10,
+		"categoria": "Tortas",
+		"status": "F"
 	},
 	{
 		"id": 2,
-		"title": "productoprueba2",
-		"description": "este es un producto actualizado",
-		"price": 300,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc125",
-		"stock": 10
-	},
-	{
-		"id": 3,
-		"title": "productoprueba3",
-		"description": "este es un producto actualizado",
-		"price": 400,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc126",
-		"stock": 10
+		"nombre": "Pascualina",
+		"porciones": 8,
+		"recetadesc": "Producto cambiado 2",
+		"img": "/img2/pastafrola.jpg",
+		"maxprod": 5,
+		"precio": 15,
+		"categoria": "Tortas",
+		"status": "F"
 	},
 	{
 		"id": 4,
-		"title": "productoprueba4",
-		"description": "este es un producto actualizado",
-		"price": 500,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc127",
-		"stock": 10
+		"nombre": "Pizza con muzza",
+		"porciones": 20,
+		"recetadesc": "Producto cambiado 4",
+		"img": "/img4/pastafrola.jpg",
+		"maxprod": 5,
+		"precio": 12,
+		"categoria": "Tortas",
+		"status": "F"
 	},
 	{
 		"id": 5,
-		"title": "productoprueba5",
-		"description": "este es un producto actualizado",
-		"price": 600,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc128",
-		"stock": 10
+		"nombre": "Tarta de frutillas",
+		"porciones": 8,
+		"recetadesc": "Producto cambiado 5",
+		"img": "/img5/pastafrola.jpg",
+		"maxprod": 5,
+		"precio": 25,
+		"categoria": "Postres",
+		"status": "F"
 	},
 	{
 		"id": 6,
-		"title": "productoprueba6",
-		"description": "este es un producto actualizado",
-		"price": 700,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc129",
-		"stock": 10
+		"nombre": "Tortilla Española",
+		"porciones": 8,
+		"recetadesc": "Como se mezclan los ingredientes",
+		"img": "/img/tortilla.jpg",
+		"maxprod": 20,
+		"precio": 25,
+		"categoria": "Tortas",
+		"status": "T"
 	},
 	{
 		"id": 7,
-		"title": "productoprueba7",
-		"description": "este es un producto actualizado",
-		"price": 800,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc130",
-		"stock": 10
+		"nombre": "Peras al vino",
+		"porciones": 8,
+		"recetadesc": "Como se mezclan los ingredientes",
+		"img": "/img/postre1-2.jpg",
+		"maxprod": 20,
+		"precio": 25,
+		"categoria": "Postres",
+		"status": "T"
 	},
 	{
 		"id": 8,
-		"title": "productoprueba",
-		"description": "este es un producto actualizado",
-		"price": 900,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc131",
-		"stock": 10
+		"nombre": "escones",
+		"porciones": 8,
+		"recetadesc": "Como se mezclan los ingredientes",
+		"img": "/img/pastafrola.jpg",
+		"maxprod": 20,
+		"precio": 12,
+		"categoria": "Tartas",
+		"status": "T"
 	},
 	{
 		"id": 9,
-		"title": "productoprueba",
-		"description": "este es un producto actualizado",
-		"price": 100,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc132",
-		"stock": 10
+		"nombre": "papas",
+		"porciones": 8,
+		"recetadesc": "Como se mezclan los ingredientes",
+		"img": "/img/pastafrola.jpg",
+		"maxprod": 20,
+		"precio": 12,
+		"categoria": "Tartas",
+		"status": "T"
 	},
 	{
 		"id": 10,
-		"title": "productoprueba",
-		"description": "este es un producto actualizado",
-		"price": 200,
-		"thumbnail": "Sin thumbnail",
-		"code": "abc133",
-		"stock": 10
+		"nombre": "milanga",
+		"porciones": 8,
+		"recetadesc": "Como se mezclan los ingredientes",
+		"img": "/img/pastafrola.jpg",
+		"maxprod": 20,
+		"precio": 12,
+		"categoria": "Tartas",
+		"status": "T"
 	}
 ]

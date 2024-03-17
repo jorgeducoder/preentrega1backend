@@ -25,16 +25,16 @@ export class CartManager {
 
 
     async getCartbyId(id) {
-
+        // Obtener un carrito por su ID
         try {
             // Obtengo todos los carritos
             const carts = await this.getCarts();
             // Busco en los carts el de igual ID con find para que me devuelva el array
             console.log(carts);
-            //const cart = carts.find((cart) => cart.idcarrito === parseInt(id)); lo cambio porque el id de carrito se cambia como string
+            // Saco un = para que no compare los tipos
             const cart = carts.find((cart) => cart.idcarrito == id);
             console.log("Estoy con este find en getCartbyId: ", cart);
-
+            // Si cart no es undefined lo va a devolver, sino el error
             return cart ? cart : console.error("No se encontro el cart con ID: ", id);
 
         } catch (error) {
@@ -45,7 +45,7 @@ export class CartManager {
 
 
     async getcartProducts(id) {
-
+        // Obtener todos los productos de un carrito
         try {
             // Obtengo  todos los carritos
             const carts = await this.getCarts();
@@ -62,7 +62,7 @@ export class CartManager {
                 console.log("Carrito no encontrado buscando sus productos");
             }
 
-           // return cartp.products ? cartp.products : console.error("No se encontro el cart con ID: ", id);
+           // otra opcion return cartp.products ? cartp.products : console.error("No se encontro el cart con ID: ", id);  
 
         } catch (error) {
             console.error("Error al obtener cart por ID", error);
@@ -71,15 +71,20 @@ export class CartManager {
     }
 
     async addCart() {
-
+        // Agregar un carrito sin productos. Habia hecho un primer  desarrollo donde se ingresaba un carrito nuevo y un primer producto
+        // Obtengo un ID numerico
         const id = await this.GetId();
+        // Defino la constante para guaardar el id y el array de productos vacios
         const nuevocarrito = { id, products: [] };
         console.log("Este  es el carrito: ", nuevocarrito)
+        
+        // Obtengo todos los carritos y pusheo el nuevo
         this.carts = await this.getCarts();
         this.carts.push(nuevocarrito);
 
         try {
-            // this. archivo hace referencia al json, carts es el objeto a guardar, en este caso el objeto carritos
+            // this.archivo hace referencia al json, carts es el objeto a guardar, en este caso el objeto carritos
+           
             await fs.promises.writeFile(this.archivo, JSON.stringify(this.carts, null, "\t"));
             return nuevocarrito;
         } catch (e) {
@@ -91,8 +96,12 @@ export class CartManager {
 
 
     async addproductCart(cid, pid, cantidad) {
+        // Agregar productos a un carrito
+        
         //Traigo todos los carritos
         const carts = await this.getCarts()
+        
+        // El objetivo es encontrar el indice del carrito a modificar y tambien usar el indice para agregar/actualizar productos
         // Busco el indice del carrito cid
         const buscoindex = carts.findIndex(cart => cart.id == cid);
 
@@ -102,8 +111,8 @@ export class CartManager {
 
             // traigo los productos del carrito
             const cartProducts = await this.getcartProducts(cid);
-            // Busco el indice del producto a agregar actualizar
             
+            // Busco el indice del producto a agregar actualizar
             console.log("Busco el indice de este producto: ", cartProducts);
             const buscoPindex = cartProducts.findIndex(products => parseInt(products.pid) === parseInt(pid));
             console.log("El indice me da: ", buscoPindex);
@@ -116,7 +125,7 @@ export class CartManager {
                 cartProducts[buscoPindex].quantity += cantidad;
 
             }
-            //Actualizo los productos en el carrito
+            //Actualizo el producto con el indice utilizado  en el carrito
             carts[buscoindex].products = cartProducts;
             try {
                 // this. archivo hace referencia al json, carts es el objeto a guardar, en este caso el objeto carritos
@@ -132,7 +141,7 @@ export class CartManager {
         }
     }
     async GetId() {
-    
+        // Metodo para obtener indices consecutivos para los carritos
         const carts = await this.getCarts();
 
         if(carts.length > 0) {
