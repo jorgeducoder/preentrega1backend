@@ -11,48 +11,57 @@ const PM = new ProductManager("./src/saborescaseros.json");
 // Define los metodos para el router de usuarios
 const router = Router();
 
+router.post("/", async (req, res) => {
+    try {
+
+        const response = await CM.addCart();
+        res.json(response);
+    } catch (error) {
+        res.send("Error al crear carrito")
+    }
+})
+
+
 
 
 router.get("/", async (req, res) => {
-    const {limit} = req.query;
-    
+    const { limit } = req.query;
+
     let carts = await CM.getCarts();
     if (limit) {
-       carts = carts.slice(0, limit);
-       }
-   
+        carts = carts.slice(0, limit);
+    }
+
     res.send(carts);
-});  
+});
 
 router.get('/:cid', async (req, res) => {
-    
+
     let cartId = req.params.cid;
-    // Convierto el tipo para que no haya problemas en CartManager con el ===
-    const cart = await CM.getCartbyId(parseInt(cartId));
-    res.send({cart});
+    const cart = await CM.getcartProducts(cartId);
+    res.send({ cart });
 });
 
 
-router.post("/:cid/productos", async (req, res) => {
-    //const { cid, pid } = req.params;
-    const { cid } = req.params;
-    const { id, quantity } = req.body;
-    console.log (cid, id, quantity);
-    if (!cid || !id || !quantity )
-        
-        // No permite crear un carrito sin al menos un producto
-        return res.status(400).send({error: "Faltan datos para crear o agregar al carrito"});
-    
-    const product = await PM.getProductbyId(id)
+
+router.post("/:cid/productos/:pid", async (req, res) => {
+    const { cid, pid } = req.params;
+    //const { cid } = req.params;
+    const { quantity } = req.body;
+    console.log(cid, pid);
+    if (!cid || !pid || !quantity) 
+
+        // Permite crear un carrito con la cantidad en el body
+        return res.status(400).send({ error: "Faltan datos para crear o agregar al carrito" });
+
+    const product = await PM.getProductbyId(pid)
     if (!product)
-    return res.status(404).send({error: "Producto no existe"});
+        return res.status(404).send({ error: "Producto no existe" });
 
-      
-     await CM.addCart(cid, id, quantity);
+    await CM.addproductCart(cid, pid, quantity);
 
-    res.status(201).send({message: "Producto creado correctamente!"});
+    res.status(201).send({ message: "Producto creado correctamente!" });
 });
-
 
 
 export default router;

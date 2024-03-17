@@ -15,7 +15,7 @@ export class ProductManager {
     async addProduct(producto) {
         
         
-
+        // Armo el array del nuevo producto con nueva id mas el array de atributos del nuevo producto
         const nuevoProducto = { id: await this.GetId(), ...producto, };
         
         
@@ -30,6 +30,7 @@ export class ProductManager {
             console.error(`Error: Nombre ${producto.nombre} ya existe.`);
             
         }else{
+            // Si no existe el producto con ese codigo lo agrego al array de productos y hago el push de todo el array
             productos.push(nuevoProducto);
             try {
                 await fs.promises.writeFile(this.archivo, JSON.stringify(productos, null, "\t"));
@@ -65,12 +66,13 @@ export class ProductManager {
 
         const productos = await this.getProduct();
         
-        // Busco la ID si existe.
+        // Busco la ID si existe en el array de productos. El findindex devuelve ei index del producto encontrado.
         
         const buscoId = productos.findIndex(product => product.id == id);
         if (buscoId === -1) return console.error("ID no encontrado");
 
-        // Hago un split del ID y el objeto con datos actualizados para cambiar solo lo que viene en req.body
+        // Hago un split del producto a actualizar mas los atributos del array producto donde vienen las actulizaciones.
+        // para cambiar solo lo que viene en req.body
         
         const productoActualizado = { ...productos[buscoId], ...producto,  };        
       
